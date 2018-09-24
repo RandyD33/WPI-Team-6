@@ -1,1 +1,3 @@
-# WPI-Team-6
+# WPI-Team-
+
+Code for projects
