@@ -5,7 +5,7 @@ void MyRobot::drive(int rval,int lval){
   rightMotor.write(lval);
 }
 
-void MyRobot::moveUp(){
+void MyRobot::moveDown(){
   		  armMotor.write(180);
 		  armMotor2.write(0);
 }
@@ -15,17 +15,17 @@ void MyRobot::armHalt(){
 		  armMotor2.write(90);
 }
 
-void MyRobot::moveDown(){
+void MyRobot::moveUp(){
   		  armMotor.write(0);
 		  armMotor2.write(180);
 }
 
-void MyRobot::harvest(){
+void MyRobot::spit(){
   harvesterMotor.write(120);
   delay(50);
   harvesterMotor.write(90);
 }
-void MyRobot::spit(){
+void MyRobot::harvest(){
   harvesterMotor.write(60);
 }
 void MyRobot::harvestStop(){

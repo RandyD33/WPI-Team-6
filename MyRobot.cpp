@@ -50,11 +50,9 @@ int MyRobot::getDebugLEDPin(){
  void MyRobot::autonomous( long time){
 		Serial.print("\r\nAuto time remaining: ");
 		Serial.print(time);
-		if(time>1000){
+
 		  digitalWrite(25,HIGH);
-		}else{
-		  digitalWrite(25,LOW);
-		}
+
 		int lmotor;
 		int rmotor;
 		int aMotor;
@@ -73,7 +71,7 @@ int MyRobot::getDebugLEDPin(){
       case LIFT:
       Serial.println(analogRead(0));
         if(analogRead(armPotPin) < orbit3Val){
-          moveDown();
+          moveUp();
         }
          if(analogRead(armPotPin) > orbit3Val){
           armHalt();
@@ -98,13 +96,9 @@ int MyRobot::getDebugLEDPin(){
  */
  void MyRobot::teleop( long time){
    
-   if(time>500){
 		  digitalWrite(26,HIGH);
-		}else if(time>500){
-      digitalWrite(26,HIGH);
-		}
-		if(time<2000){
-      digitalWrite(25,LOW);
+		if(time<20000){
+      digitalWrite(25,HIGH);
 		}else{
      digitalWrite(25,LOW);
     }
@@ -118,20 +112,18 @@ int MyRobot::getDebugLEDPin(){
 		}
 		
 		if(dfw->r2()){
-		  moveUp();
-		}else if(!dfw -> r2()){
-		  armHalt();
-		}if(dfw->r1()){
 		  moveDown();
-		}else if(!dfw -> r1()){
-		  armHalt();
-		}
+		}else if(dfw->r1()){
+		  moveUp();
+		}else if(!dfw -> r1()&&!dfw -> r2()){
+     armHalt();     
+    }
 		
 		if(dfw->l1()){
-		  harvest();
+		  spit();
 		
 		}if(dfw->l2() && !running){
-		  spit();
+		  harvest();
 		  running = true;
 		}else if(dfw -> l2() && running){
 		  harvestStop();
