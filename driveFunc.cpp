@@ -1,21 +1,17 @@
 #include"MyRobot.h"
 
 void MyRobot::timeBasedRed() {
-  drive(150, 180);
-  delay(1200);
+  drive(150, 150);
+  delay(600);
   drive(90, 90);
-  drive(90, 135);
-  delay(200);
-  drive(90, 90);
+
 }
 
 void MyRobot::timeBasedBlue() {
-  drive(180, 150);
-  delay(1200);
+  drive(150, 150);
+  delay(600);
   drive(90, 90);
-  drive(135, 90);
-  delay(200);
-  drive(90, 90);
+
 }
 
 void MyRobot::lightBasedRed() {

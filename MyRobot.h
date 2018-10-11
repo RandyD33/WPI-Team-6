@@ -52,7 +52,7 @@ private:
 	const int DARK = 30;
 	const int MID = 70;
 	const int LIGHT = 200;
-	const int orbit3Val = 580;
+	int orbitVal;
 	const int k = 10;
 	bool running;
  void turnMotorsOff();

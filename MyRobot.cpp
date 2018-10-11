@@ -27,6 +27,12 @@ void MyRobot::initialize(int rightMotorPin, int leftMotorPin, int armMotorPin,in
   autoState = LIFT;
   running = false;
 
+  if(digitalRead(53)==HIGH){
+    orbitVal = 580;
+  }else{
+    orbitVal = 290;
+  }
+
   pinMode(25,OUTPUT);
   pinMode(26,OUTPUT);
 }
@@ -59,10 +65,15 @@ int MyRobot::getDebugLEDPin(){
 		
     switch(autoState){
       case DRIVE:
-        if(digitalRead(8)==HIGH){
+        if(digitalRead(52)==HIGH && digitalRead(53) == HIGH){
           lightBasedRed();
-        }else{
+        }else if(digitalRead(52) == LOW && digitalRead(53)==HIGH){
           lightBasedBlue();
+        }
+         if(digitalRead(52)==HIGH && digitalRead(53) == LOW){
+          timeBasedRed();
+        }else if(digitalRead(52) == LOW && digitalRead(53)==LOW){
+          timeBasedBlue();
         }
         
         autoState = DUMP;
@@ -70,10 +81,10 @@ int MyRobot::getDebugLEDPin(){
       
       case LIFT:
       Serial.println(analogRead(0));
-        if(analogRead(armPotPin) < orbit3Val){
+        if(analogRead(armPotPin) < orbitVal){
           moveUp();
         }
-         if(analogRead(armPotPin) > orbit3Val){
+         if(analogRead(armPotPin) > orbitVal){
           armHalt();
           autoState=DRIVE;
         }
